@@ -1,9 +1,9 @@
 <script setup>
-import DisplayCountries from "../src/components/DispalyCountries.vue";
+// Remove the direct import since we'll use router-view
 </script>
 
 <template>
-    <DisplayCountries />
+    <router-view />
 </template>
 
 <style scoped></style>
