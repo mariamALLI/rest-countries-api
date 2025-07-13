@@ -2,20 +2,21 @@
 import { ref, computed } from "vue";
 import countries from "../data.json";
 
+// Pagination variables
 const currentPage = ref(1);
 const countriesPerPage = 12;
+const searchQuery = ref("");
+const selectedRegion = ref("");
 
-// Calculate total pages
+// Calculate total pages and get countries for current page
 const totalPages = computed(() => Math.ceil(countries.length / countriesPerPage));
-
-// Get countries for current page
 const paginatedCountries = computed(() => {
     const startIndex = (currentPage.value - 1) * countriesPerPage;
     const endIndex = startIndex + countriesPerPage;
-    return countries.slice(startIndex, endIndex);
+    return countries.filter(country => country.name.toLowerCase().includes(searchQuery.value.toLowerCase()) && (selectedRegion.value === "" || country.region === selectedRegion.value)).slice(startIndex, endIndex);
 });
 
-// Navigation functions
+// Navigation functions to go to the next page, previous page, and the first page
 function goToPage(page) {
     if (page >= 1 && page <= totalPages.value) {
         currentPage.value = page;
@@ -65,8 +66,21 @@ const pageNumbers = computed(() => {
 
 <template>
     <section>
-        <h1>All Countries</h1>
-        <p>Browse through {{ countries.length }} countries around the world.</p>
+       <div class="search-container" v-if="totalPages > 1" role="searchbox" aria-label="Search for a country">
+            <input class="search-input" type="text" placeholder="Search for a country..." v-model="searchQuery" @input="goToPage(1)" />
+            <button class="search-btn" @click="searchQuery = ''">Clear</button>
+
+            <div class="filter-container">
+                <select class="filter-select" name="region" id="region" v-model="selectedRegion" @change="goToPage(1)">
+                    <option value="">All Regions</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Americas">Americas</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Oceania">Oceania</option>
+                </select>
+            </div>
+       </div>
         
         <!-- Countries Grid -->
         <div class="flex_card">
@@ -157,6 +171,43 @@ section p {
     text-align: center;
     margin-bottom: 2rem;
     color: #666;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.search-input {
+    width: 76%;
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    height: 10px;
+    font-size: .8rem;
+    font-weight: 400;
+    position: relative;
+    top: 0.5rem;
+    left: 0.1rem;
+}
+
+.filter-select {
+    width: 100%;
+    padding: .4rem 2.5rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: smaller;
+}
+.search-btn {
+    padding: 0.4rem 2.5rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    position: absolute;
+    font-size: 0.8rem;
+    left: 14.6rem;
+    top: 1.5rem;
 }
 
 .flex_card {
@@ -313,6 +364,21 @@ section p {
         flex-direction: row;
         gap: 2rem;
     }
+
+    .search-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .search-input {
+        width: 40%;
+        left: 1.1rem;
+    }
+
+    .search-btn {
+        left: 30.6rem;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -321,3 +387,10 @@ section p {
     }
 }
 </style>
+
+
+<!-- what the v-model does is that it binds the value of the input to the searchQuery variable and the @input event is triggered when the user types in the input -->
+<!-- the @input event is triggered when the user types in the input -->
+<!-- the goToPage(1) function is called when the user types in the input and the user is redirected to the first page -->
+<!-- the goToPage(1) function is called when the user selects a region and the user is redirected to the first page -->
+<!-- the goToPage(1) function is called when the user clicks the clear button and the user is redirected to the first page -->
