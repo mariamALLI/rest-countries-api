@@ -81,21 +81,23 @@ function getCountryNameByCode(code) {
 .back-button {
     display: inline-block;
     padding: 0.5rem 2rem;
-    background-color: hsl(209, 23%, 22%);
-    color: white;
+    background-color: var(--bg-elements);
+    color: var(--text-primary);
     text-decoration: none;
     border-radius: 5px;
     margin-bottom: 3rem;
     transition: background-color 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .back-button:hover {
-    background-color: hsl(209, 23%, 30%);
+    background-color: var(--card-hover);
 }
 
 .country-info h3 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
+    color: var(--text-primary);
 }
 
 .country_detail {
@@ -113,12 +115,13 @@ function getCountryNameByCode(code) {
     width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
 }
 
 .country-info h2 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
+    color: var(--text-primary);
 }
 
 .info-grid {
@@ -132,16 +135,18 @@ function getCountryNameByCode(code) {
 .part1 p, .part2 p {
     font-size: smaller;
     line-height: 0.8;
+    color: var(--text-primary);
 }
 
 
 .borders-section h3 {
     margin-bottom: 1rem;
+    color: var(--text-primary);
 }
 
 .borders-section p {
     font-weight: 500;
-    font-size: smaller;
+    color: var(--text-primary);
 }
 
 .borders-list {
@@ -153,21 +158,23 @@ function getCountryNameByCode(code) {
 .border-link {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: hsl(209, 23%, 22%);
-    color: #ccc;
+    background-color: var(--bg-elements);
+    color: var(--text-primary);
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
     font-size: 0.5rem;
+    border: 1px solid var(--border-color);
 }
 
 .border-link:hover {
-    background-color: hsl(209, 23%, 30%);
+    background-color: var(--card-hover);
 }
 
 .not-found {
     text-align: center;
     padding: 3rem;
+    color: var(--text-primary);
 }
 
 @media (min-width: 768px) {

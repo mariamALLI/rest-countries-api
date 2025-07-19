@@ -105,9 +105,11 @@ const pageNumbers = computed(() => {
                         aria-label="Country Details"
                     >
                         <h2>{{ country.name }}</h2>
-                        <p><strong>Population:</strong> {{ country.population.toLocaleString() }}</p>
-                        <p><strong>Region:</strong> {{ country.region }}</p>
-                        <p><strong>Capital:</strong> {{ country.capital }}</p>
+                            <div class="content_small-text">
+                                <p>Population: <span> {{ country.population.toLocaleString() }}</span></p>
+                                <p>Region: <span> {{ country.region }}</span></p>
+                                <p>Capital: <span> {{ country.capital }}</span></p>
+                            </div>
                     </div>
                 </router-link>
             </article>
@@ -157,7 +159,7 @@ const pageNumbers = computed(() => {
 section {
     width: 90%;
     margin: 0 auto;
-    padding: 1rem 1.5rem;
+    /* padding: 1rem 1.5rem; */
     max-width: 1280px;
 }
 
@@ -168,7 +170,6 @@ section h1 {
 }
 
 section p {
-    text-align: center;
     margin-bottom: 2rem;
     color: #666;
 }
@@ -184,30 +185,39 @@ section p {
     width: 76%;
     padding: 1rem 1.5rem;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     height: 10px;
     font-size: .8rem;
     font-weight: 400;
     position: relative;
-    top: 0.5rem;
+    top: 1.5rem;
     left: 0.1rem;
+    color: var(--text-secondary);
+    background-color: var(--input-bg);
 }
 
 .filter-select {
-    width: 100%;
+    width: 60%;
     padding: .4rem 2.5rem;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     font-size: smaller;
+    margin-top: 10px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
 }
 .search-btn {
     padding: 0.4rem 2.5rem;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     position: absolute;
     font-size: 0.8rem;
     left: 14.6rem;
-    top: 1.5rem;
+    top: 5.9rem;
+    background-color: var(--bg-elements);
+    color: var(--text-primary);
+    cursor: pointer;
+    border-left: none;
 }
 
 .flex_card {
@@ -220,15 +230,18 @@ section p {
 .box {
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
     transition: all 0.3s ease;
-    background-color: transparent;
+    background-color: var(--card-bg);
     cursor: pointer;
+    width: 320px;
+    border: 1px solid var(--border-color);
 }
 
 .box:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    background-color: var(--card-hover);
 }
 
 .country-link {
@@ -255,25 +268,41 @@ section p {
 }
 
 .card-content {
-    background-color: hsl(209, 23%, 22%);
-    color: white;
-    padding: 1.5rem;
-    line-height: 1.6;
+    background-color: var(--card-bg);
+    padding: 2rem 1.5rem;
+    line-height: 1.5;
+    text-align: left;
 }
 
 .card-content h2 {
     font-size: 1.25rem;
     margin-bottom: 1rem;
     font-weight: 600;
+    color: var(--text-primary);
+    background-color: transparent;
 }
 
 .card-content p {
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
+    color: var(--text-primary);
+    background-color: transparent;
+
 }
 
-.card-content strong {
-    color: #ccc;
+/* .card-content strong {
+    color: var(--text-primary);
+} */
+
+.card-content span {
+    color: var(--text-secondary); 
+    font-weight: 100;
+    background-color: transparent;
+
+}
+
+.content_small-text {
+    background-color: transparent;
 }
 
 /* Pagination Styles */
@@ -284,7 +313,7 @@ section p {
     gap: 1rem;
     margin-top: 2rem;
     padding: 2rem 0;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border-color);
 }
 
 .pagination-info {
@@ -292,7 +321,7 @@ section p {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    color: #666;
+    color: var(--text-secondary);
     font-size: 0.9rem;
 }
 
@@ -306,9 +335,9 @@ section p {
 
 .pagination-btn {
     padding: 0.5rem 1rem;
-    background-color: hsl(209, 23%, 22%);
-    color: white;
-    border: none;
+    background-color: var(--bg-elements);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -316,7 +345,7 @@ section p {
 }
 
 .pagination-btn:hover:not(:disabled) {
-    background-color: hsl(209, 23%, 30%);
+    background-color: var(--card-hover);
 }
 
 .pagination-btn:disabled {
@@ -334,9 +363,9 @@ section p {
 
 .page-btn {
     padding: 0.5rem 0.75rem;
-    background-color: #f5f5f5;
-    color: #333;
-    border: 1px solid #ddd;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -345,13 +374,13 @@ section p {
 }
 
 .page-btn:hover {
-    background-color: #e9e9e9;
+    background-color: var(--card-hover);
 }
 
 .page-btn.active {
-    background-color: hsl(209, 23%, 22%);
-    color: white;
-    border-color: hsl(209, 23%, 22%);
+    background-color: var(--bg-elements);
+    color: var(--text-primary);
+    border-color: var(--bg-elements);
 }
 
 @media (min-width: 768px) {
@@ -373,11 +402,20 @@ section p {
 
     .search-input {
         width: 40%;
-        left: 1.1rem;
+        top: 1.5rem;
     }
 
     .search-btn {
-        left: 30.6rem;
+        left: 29.6rem;
+        top: 5.5rem;
+    }
+
+    .filter-select {
+        position: relative;
+        top: 1.5rem;
+        right: 1.9rem;
+        width: 100%;
+        margin-top: 0;
     }
 }
 

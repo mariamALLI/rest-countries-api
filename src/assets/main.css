@@ -1,8 +1,23 @@
-/* @import "./base.css"; */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--bg-primary);
+}
 
-/* #app {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    font-weight: normal;
-} */
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  /* padding: 2rem; */
+  font-weight: normal;  
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+.toggle {
+    background-color: hsl(0, 100%, 100%);
+}
